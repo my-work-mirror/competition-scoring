@@ -33,6 +33,13 @@ class Connection:
     def executescript(self, script):
         for statement in script.split(";"):
             if statement.strip():
+                # PostgreSQL checks table ownership even for CREATE INDEX IF
+                # NOT EXISTS. Existing platform-owned indexes need no DDL.
+                index = re.match(r"CREATE INDEX IF NOT EXISTS ([a-z_][a-z0-9_]*)\b", statement.strip(), flags=re.I)
+                if index:
+                    existing = self.execute("SELECT to_regclass(?)", ("competition." + index[1],)).fetchone()
+                    if existing[0] is not None:
+                        continue
                 self.execute(statement)
 
     def commit(self):

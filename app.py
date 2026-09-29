@@ -10,6 +10,7 @@ from urllib.request import ProxyHandler, Request, build_opener
 from flask import Flask, jsonify, send_from_directory
 
 from backend.competition.api import create_competition_blueprint
+from backend.competition.store import CompetitionStore
 from backend.database import connect_database
 
 ROOT = Path(__file__).resolve().parent
@@ -34,6 +35,8 @@ def identity(key_hash: str) -> dict | None:
 
 app = Flask(__name__, static_folder=None)
 app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
+# Validate actual schema initialization before Gunicorn can pass health checks.
+CompetitionStore(Path("/app-data/competition"))
 app.register_blueprint(create_competition_blueprint(
     config_file=CONFIG, db_file=Path("/app-data/competition"),
     resolve_identity=identity, token_secret=TOKEN_SECRET,
