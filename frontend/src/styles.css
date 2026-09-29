@@ -1,0 +1,744 @@
+:root { font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; color:#1f2329; background:#f6f3ec; } * { box-sizing:border-box; } body { margin:0; } .page { min-height:100vh; padding:20px; background:linear-gradient(180deg,#fbfaf7,#f4f1ea); } button,input,textarea,select { font:inherit; } button { cursor:pointer; } button:disabled { opacity:.5; cursor:not-allowed; } .ai-app-breadcrumb { display:flex; gap:8px; font-size:13px; margin-bottom:18px; color:#58616c; } .ai-app-breadcrumb a { color:#135f59; }
+/* 君正杯评分系统：评委在现场用手机打分，所以先按窄屏排版，再向上适配桌面。 */
+.judge-page {
+  width: min(1180px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 18px 16px 40px;
+  margin-inline: auto;
+}
+
+.judge-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.judge-eyebrow svg {
+  width: 15px;
+  height: 15px;
+}
+
+.judge-gate {
+  display: grid;
+  gap: 20px;
+  padding: 24px 20px;
+  border: 1px solid #e3ddd0;
+  border-radius: 18px;
+  background: #fffdf8;
+  box-shadow: 0 18px 40px rgba(31, 35, 41, 0.06);
+}
+
+.judge-gate-copy h1 {
+  margin: 8px 0 10px;
+  font-size: 26px;
+}
+
+.judge-gate-copy p {
+  margin: 0;
+  color: #5a6069;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.judge-gate-form {
+  display: grid;
+  gap: 10px;
+}
+
+.judge-gate-form label {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.judge-gate-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #d8d2c4;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.judge-gate-input svg {
+  width: 18px;
+  height: 18px;
+  color: #8a9099;
+}
+
+.judge-gate-input input {
+  flex: 1;
+  border: 0;
+  padding: 14px 0;
+  font-size: 16px;
+  background: transparent;
+}
+
+.judge-gate-input input:focus {
+  outline: none;
+}
+
+.judge-gate-form button,
+.judge-sheet-footer button,
+.judge-admin-panel > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 0 22px;
+}
+
+.judge-gate-form button svg,
+.judge-sheet-footer button svg,
+.judge-admin-panel > button svg,
+.judge-header-actions button svg,
+.judge-admin-head button svg,
+.judge-upload svg,
+.judge-back svg {
+  width: 17px;
+  height: 17px;
+}
+
+.judge-header {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e3ddd0;
+}
+
+.judge-header h1 {
+  margin: 8px 0 6px;
+  font-size: 24px;
+}
+
+.judge-header p {
+  margin: 0;
+  color: #5a6069;
+  font-size: 13px;
+}
+
+.judge-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.judge-page button.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  color: #135f59;
+  background: #eaf2f0;
+  font-size: 13px;
+}
+
+.judge-page button.secondary:hover:enabled {
+  background: #d9e8e4;
+}
+
+.judge-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 4px;
+}
+
+.judge-tabs button {
+  flex-shrink: 0;
+  margin-top: 0;
+  min-height: 38px;
+  padding: 0 16px;
+  color: #4a5058;
+  background: #efeade;
+  font-size: 13px;
+}
+
+.judge-tabs button:hover:enabled {
+  background: #e4ddcd;
+}
+
+.judge-tabs button.active {
+  color: #ffffff;
+  background: #135f59;
+}
+
+.judge-progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #eaf2f0;
+  color: #16413e;
+  font-size: 14px;
+}
+
+.judge-progress svg {
+  width: 17px;
+  height: 17px;
+}
+
+.judge-progress strong {
+  font-size: 17px;
+}
+
+.judge-closed {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f6e7e7;
+  color: #9f1f1f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.judge-team-list {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.judge-team-list button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto 18px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 0;
+  padding: 14px 14px;
+  border: 1px solid #e3ddd0;
+  border-radius: 14px;
+  color: #1f2329;
+  background: #fffdf8;
+  text-align: left;
+}
+
+.judge-team-list button:hover:enabled {
+  border-color: #b9d4cf;
+  background: #f7fbfa;
+}
+
+.judge-team-order {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #efeade;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.judge-team-main {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.judge-team-name {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.judge-team-meta {
+  color: #757b83;
+  font-size: 12px;
+}
+
+.judge-team-score {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #efeade;
+  color: #6c727a;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.judge-team-score.done {
+  background: #e8f2eb;
+  color: #1b5f2a;
+}
+
+.judge-team-list svg {
+  width: 18px;
+  height: 18px;
+  color: #a8adb4;
+}
+
+.judge-sheet {
+  display: grid;
+  gap: 16px;
+}
+
+.judge-sheet-head {
+  display: grid;
+  gap: 10px;
+}
+
+.judge-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 0;
+  min-height: 36px;
+  padding: 0 14px 0 8px;
+  color: #135f59;
+  background: #eaf2f0;
+  font-size: 13px;
+}
+
+.judge-back:hover:enabled {
+  background: #d9e8e4;
+}
+
+.judge-sheet-title h2 {
+  margin: 4px 0;
+  font-size: 22px;
+}
+
+.judge-sheet-order {
+  color: #757b83;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.judge-sheet-label {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #efeade;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.judge-sheet-items {
+  display: grid;
+  gap: 12px;
+}
+
+.judge-item {
+  display: grid;
+  gap: 10px;
+  padding: 16px 14px;
+  border: 1px solid #e3ddd0;
+  border-radius: 14px;
+  background: #fffdf8;
+}
+
+.judge-item-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.judge-item-name {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.judge-item-max {
+  color: #757b83;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.judge-item-criteria {
+  margin: 0;
+  color: #5a6069;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.judge-item-control {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 56px;
+  align-items: center;
+  gap: 10px;
+}
+
+.judge-item-control button {
+  display: grid;
+  place-items: center;
+  margin-top: 0;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 16px;
+  background: #135f59;
+}
+
+.judge-item-control button:disabled {
+  background: #d8d2c4;
+  color: #ffffff;
+}
+
+.judge-item-control button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.judge-item-value {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.judge-item-slider {
+  width: 100%;
+  height: 28px;
+  accent-color: #135f59;
+}
+
+.judge-comment {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.judge-comment textarea {
+  min-height: 84px;
+  padding: 12px;
+  border: 1px solid #d8d2c4;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  resize: vertical;
+}
+
+.judge-sheet-footer {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e3ddd0;
+  border-radius: 14px;
+  background: #fffdf8;
+  box-shadow: 0 -6px 20px rgba(31, 35, 41, 0.08);
+}
+
+.judge-sheet-total {
+  display: grid;
+  gap: 2px;
+  font-size: 12px;
+  color: #757b83;
+}
+
+.judge-sheet-total strong {
+  color: #1f2329;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+}
+
+.judge-sheet-total em {
+  color: #9ea1a6;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.judge-saved {
+  margin: 0;
+  color: #1b5f2a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.judge-empty {
+  padding: 24px 0;
+  color: #757b83;
+  font-size: 14px;
+  text-align: center;
+}
+
+.judge-admin-panel {
+  display: grid;
+  gap: 14px;
+  padding: 18px 16px;
+  border: 1px solid #e3ddd0;
+  border-radius: 16px;
+  background: #fffdf8;
+}
+
+.judge-admin-head {
+  display: grid;
+  gap: 10px;
+}
+
+.judge-admin-head h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.judge-admin-head p {
+  margin: 0;
+  color: #5a6069;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.judge-upload {
+  position: relative;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: #135f59;
+  background: #eaf2f0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.judge-upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.judge-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.judge-switches label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.judge-switches input {
+  width: 18px;
+  height: 18px;
+  accent-color: #135f59;
+}
+
+.judge-table-scroll {
+  overflow-x: auto;
+}
+
+.judge-results table,
+.judge-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.judge-results th,
+.judge-results td,
+.judge-admin-table th,
+.judge-admin-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eae4d7;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.judge-results th,
+.judge-admin-table th {
+  color: #6c727a;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.judge-admin-table input {
+  width: 84px;
+  padding: 8px;
+  border: 1px solid #d8d2c4;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.judge-results-name {
+  display: block;
+  font-weight: 800;
+}
+
+.judge-results-label,
+.judge-results-note {
+  display: block;
+  color: #868c94;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.judge-results-total {
+  font-size: 15px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.judge-award {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #fdf1d8;
+  color: #8a5b12;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.judge-cell-done {
+  color: #1b5f2a;
+  font-weight: 800;
+  background: #f2f8f4;
+}
+
+.judge-cell-pending {
+  color: #b9bdc3;
+}
+
+.judge-cell-time {
+  display: block;
+  color: #868c94;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.judge-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.judge-awards li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fdf1d8;
+  color: #8a5b12;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.judge-awards svg {
+  width: 14px;
+  height: 14px;
+}
+
+.judge-danger-zone {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid #e5bdbd;
+  border-radius: 14px;
+  background: #fdf6f6;
+}
+
+.judge-danger-copy > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #9f1f1f;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.judge-danger-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
+.judge-danger-copy p {
+  margin: 6px 0 0;
+  color: #6c5050;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.judge-danger-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.judge-page button.danger {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  margin-top: 0;
+  padding: 0 16px;
+  color: #ffffff;
+  background: #9f1f1f;
+  font-size: 13px;
+}
+
+.judge-page button.danger:hover:enabled {
+  background: #841919;
+}
+
+.judge-page button.danger:disabled {
+  color: #ffffff;
+  background: #cfa8a8;
+}
+
+.judge-page button.danger svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 720px) {
+  .judge-page {
+    gap: 20px;
+    padding: 26px 24px 56px;
+  }
+
+  .judge-gate {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+    align-items: center;
+    padding: 32px;
+  }
+
+  .judge-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .judge-admin-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .judge-sheet-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .judge-admin-panel {
+    padding: 22px;
+  }
+}

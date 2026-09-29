@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "competition-scoring",
+  "name": "君正杯评分系统",
+  "description": "评委使用本人 API Key 登录，完成现场评分和成绩管理。",
+  "port": 8080,
+  "health_path": "/health",
+  "data_contract": "competition-v1",
+  "database": true
+}
